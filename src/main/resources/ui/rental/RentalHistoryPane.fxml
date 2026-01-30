@@ -1,0 +1,24 @@
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="organization.ui.rental.RentalHistoryController"
+      spacing="10"
+      prefWidth="400">
+
+    <Label text="Historia umów"
+           style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+
+    <TableView fx:id="historyTable">
+
+        <columns>
+            <TableColumn fx:id="dateCol" text="Data"/>
+            <TableColumn fx:id="trailerCol" text="Przyczepa"/>
+            <TableColumn fx:id="pickupCol" text="Odbiór"/>
+            <TableColumn fx:id="returnCol" text="Zwrot"/>
+        </columns>
+
+    </TableView>
+</VBox>

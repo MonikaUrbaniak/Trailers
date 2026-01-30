@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="10"
+      xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="organization.ui.trailer.TrailerSelectionController">
+
+    <Label text="Wybierz przyczepę"
+           style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+
+    <TableView fx:id="trailersTable" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="nameCol" text="Nazwa"/>
+            <TableColumn fx:id="regCol" text="Rejestracja"/>
+            <TableColumn fx:id="price4hCol" text="4h"/>
+            <TableColumn fx:id="price24hCol" text="24h"/>
+            <TableColumn fx:id="widthCol" text="Szer."/>
+            <TableColumn fx:id="lengthCol" text="Dł."/>
+            <TableColumn fx:id="heightCol" text="Wys."/>
+            <TableColumn fx:id="springCol" text="Resor"/>
+            <TableColumn fx:id="wheelCol" text="Koło zap."/>
+            <TableColumn fx:id="axleCol" text="Oś"/>
+            <TableColumn fx:id="addInfoCol" text="Info"/>
+        </columns>
+    </TableView>
+
+</VBox>

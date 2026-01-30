@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Umowa wypożyczenia przyczepy</title>
+    <style>
+        body { font-family: DejaVu Sans, Arial, sans-serif; font-size: 16px; line-height: 1.4; margin: 28px; }
+        h1 { text-align: center; font-size: 16px; margin: 0 0 16px; }
+        h2 { font-size: 12px; margin: 14px 0 6px; }
+        p  { margin: 6px 0;
+           font-size: 12px;}
+        .sig { margin-top: 28px; display: flex; gap: 24px; }
+        .sig .box { flex: 1; text-align: center; }
+        .sig .line { margin-top: 36px; border-top: 1px solid #000; }
+        .center {
+  text-align: center;
+}
+    </style>
+</head>
+<body>
+
+<h1>UMOWA WYPOŻYCZENIA PRZYCZEPY</h1>
+
+<p class="center" style="font-size: 14px;">
+    Umowa wypożyczenia zawarta w dniu <strong>[[${contractDate}]]</strong> roku
+    pomiędzy <strong>[[${lessor.name}]]</strong>
+    z siedzibą w <strong>[[${lessor.address}]]</strong>,
+    tel. <strong>[[${lessor.phone}]]</strong>,
+    reprezentowanym przez <strong>[[${lessor.representative}]]</strong>,
+    zwanym dalej <strong>Wynajmującym</strong>,
+    </p>
+<p style="font-size: 14px;">
+    a <strong>[[${client.name}]]</strong>,<br/>
+    adres: <strong>[[${client.address}]]</strong>,<br/>
+    NIP: <strong>[[${client.nip}]]</strong>,<br/>
+    tel.: <strong>[[${client.phone}]]</strong>,<br/>
+    dowód osobisty nr <strong>[[${client.idNumber}]]</strong>,<br/>
+    wydany przez <strong>[[${client.idIssuedBy}]]</strong>,<br/>
+    zwaną/ym dalej <strong>Najemcą</strong>.
+</p>
+
+<h2 class="center">§1</h2>
+
+
+<p>
+    1. Przedmiotem umowy jest wypożyczenie (przekazanie do odpłatnego użytkowania) przyczepy o dopuszczalnej masie całkowitej
+    <strong>750 DMC</strong>, o nr rejestracyjnym
+    <strong>[[${trailer.registrationNumber}]]</strong>.
+</p>
+
+<p>
+    2. Wyposażenie: koło zapasowe (na dyszlu), nóżka na kółku z regulacją wysokości dyszla (przy dyszlu), plandeka.
+</p>
+
+<h2 class="center">§2</h2>
+
+<p>
+    1. Wynajmujący oświadcza, iż jest właścicielem opisanej w §1 przyczepy i może nią swobodnie i bez żadnych ograniczeń rozporządzać.
+</p>
+
+<p>
+    2. Najemca oświadcza, że otrzymuje przyczepę w bardzo dobrym stanie technicznym, bez jakich kol wiek wad, braków, usterek, co potwierdza własnoręcznym podpisem na końcu umowy.
+</p>
+
+<p>
+    3. W przypadku stwierdzenia, jakiejkolwiek usterki przy wypożyczaniu przyczepy wymienionej w §1 muszą być ona wymieniona w umowie i dokładnie opisana w §2 punkcie 3-m;
+    ...............................................................................................................................
+    <strong>[[${handoverNotes}]]</strong>
+</p>
+
+<p>
+    4. Najemca oświadcza, iż został poinstruowany i przeszkolony w zakresie obsługi przyczepy, w tym poszczególnych urządzeń technicznych.
+    Nie wnosi w tym zakresie żadnych uwag i zastrzeżeń.
+</p>
+
+<p>
+    5. Najemca oświadcza, iż zapoznał się z wymaganiami, kwalifikacjami i uprawnieniami do kierowania zestawem z przyczepą,
+    oraz ponosi całkowita i wyłączną odpowiedzialność z tego tytułu.
+</p>
+
+<p>
+    6. Najemca, jako drugiego kierowcę wskazuje i upoważnia
+    ...............................................................................................................................
+</p>
+
+<h2 class="center">§3</h2>
+
+<p>
+    1. Najemca zobowiązuje się do korzystania z przyczepy zgodnie z jej przeznaczeniem i właściwościami <strong>(nie przekraczać dopuszczalnej ładowności)</strong>.
+</p>
+
+<p>
+    2. Najemca nie może dokonywać żadnych zmian, przeróbek oraz samodzielnych napraw w wypożyczonej przyczepie.
+    Jeżeli w skutek użytkowania dojdzie do awarii, naprawa może nastąpić tylko w autoryzowanym serwisie, po uprzednim poinformowaniu wynajmującego.
+</p>
+
+<p>
+    3. Szczegółowe warunki i zasady wynajmu przyczepy oraz urządzeń technicznych,
+    obowiązki i prawa stron, zobowiązania i odpowiedzialność Najemcy oraz inne postanowienia określa regulamin wynajmu i cennik  do obowiązkowego przeczytania w miejscu
+</p>
+<p>
+    2. Zabrania się dokonywania przeróbek i napraw bez zgody Wynajmującego.
+</p>
+
+
+<h2 class="center">§4</h2>
+
+<p>
+    1. Przyczepę oraz osprzęt, o której mowa wyżej, wynajmuje się
+    od godz. ............ dnia
+    ..………….20….....r
+    do godz. ............ dnia
+    …………20…....r.
+    Najemca zobowiązuje się do zwrotu wypożyczonej przyczepy wymienionej w punkcie 1 § 1 do upływu wymienionego wyżej terminu.
+    W przypadku zwłoki  postępowanie będzie zgodne z  regulaminem.
+</p>
+
+<p>
+    2. Miejsce odbioru przyczepy przez Najemcę: <strong>[[${pickupLocation}]]</strong>
+</p>
+
+<p>
+    3. Miejsce zwrotu przyczepy przez Najemcę: <strong>[[${returnLocation}]]</strong>
+</p>
+
+<p>
+    4. Najemca nie ma możliwości/prawa przedłużania terminu wynajmu bez wyraźnej zgody potwierdzonej pisemnie,
+    bądź sms- em z wyświetlonym nr nadawcy .  Tel.  Do osoby wynajmującej podany jest na początku umowy.
+</p>
+
+<h2 class="center">§5</h2>
+
+<p>
+    1. Opłata brutto, z tytułu wypożyczenia przyczepy pobierana jest w dniu najmu i wynosi: ............ zł.
+</p>
+
+<p>
+    2. Najemca zobowiązuje się do pokrycia szkód powstałych podczas użytkowania w pełnej wysokości jak w zapisach regulaminu.
+</p>
+
+<p>
+    3. Wraz z przyczepą i wymienionym wcześniej osprzętem, Wynajmujący przekazuje na czas trwania najmu Najemcy; dowód rejestracyjny i polisę ubezpieczeniową.
+</p>
+
+<p>
+    4. Przyczepa posiada ważne ubezpieczenie.
+</p>
+
+<p>
+    5. Najemca bierze pełną odpowiedzialność za wypożyczoną przyczepę.
+</p>
+
+<p>
+    6. W przypadku zniszczenia na skutek niewłaściwego użytkowania, wypadku drogowego, w ponad 50% wartości nowej przyczepy w dniu oddania,
+    Najemca zobowiązuje się do zwrotu 100% równowartości nowej przyczepy odpowiadającej tej samej klasie i wymiarom.
+
+    - Regulamin wydawany jest Najemcy ( do ręki) na jego życzenie
+    - W sprawach nieuregulowanych mają zastosowanie odpowiednie przepisy Kodeksu Cywilnego, Umowę sporządzono w dwóch jednakowych egzemplarzach,
+    po jednej dla każdej ze stron.
+
+</p>
+
+
+<div class="sig">
+    <div class="box">
+        <div class="line"></div>
+        <div>Wynajmujący</div>
+    </div>
+    <div class="box">
+        <div class="line"></div>
+        <div>Najemca</div>
+    </div>
+</div>
+
+<p style="margin-top: 18px;">
+    Data i miejscowość: <strong>[[${signingPlace}]]</strong>,
+    <strong>[[${contractDate}]]</strong>
+</p>
+
+</body>
+</html>

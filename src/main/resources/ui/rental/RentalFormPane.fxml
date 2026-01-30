@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="10"
+      xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="organization.ui.rental.RentalLocationAndDateController">
+
+    <Label text="Odbiór/zwrot"
+           style="-fx-font-size: 15px; -fx-font-weight: bold;"/>
+
+    <GridPane hgap="10" vgap="10">
+
+        <Label text="Miejsce odbioru przyczepy"/>
+        <ComboBox fx:id="pickupLocationBox"
+                  editable="true"
+                  prefWidth="300"
+                  GridPane.columnIndex="1"/>
+
+        <Label text="Miejsce zwrotu przyczepy"
+               GridPane.rowIndex="1"/>
+        <ComboBox fx:id="returnLocationBox"
+                  editable="true"
+                  prefWidth="300"
+                  GridPane.rowIndex="1"
+                  GridPane.columnIndex="1"/>
+
+        <Label text="Data umowy"
+               GridPane.rowIndex="2"/>
+        <DatePicker fx:id="contractDatePicker"
+                    GridPane.rowIndex="2"
+                    GridPane.columnIndex="1"/>
+
+    </GridPane>
+
+</VBox>
