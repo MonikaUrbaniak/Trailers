@@ -35,7 +35,10 @@ public class PdfTemplateRenderer {
 
         values.put("client.name", safe(model.getClientName()));
         values.put("client.address", safe(model.getClientAddress()));
-        values.put("client.nip", safe(model.getClientNip()));
+        values.put("client.companyLine", safe(model.getClientCompanyLine())
+        );
+        values.put("client.nipLine", safe(model.getClientNipLine())
+        );
         values.put("client.phone", safe(model.getClientPhone()));
         values.put("client.idNumber", safe(model.getClientIdNumber()));
         values.put("client.idIssuedBy", safe(model.getClientIdIssuedBy()));

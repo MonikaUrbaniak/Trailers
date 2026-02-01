@@ -3,7 +3,7 @@ package organization.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import organization.service.ClientType;
+import organization.enums.ClientType;
 import jakarta.validation.constraints.NotBlank;
 
 @Setter

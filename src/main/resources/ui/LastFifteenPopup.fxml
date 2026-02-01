@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="organization.ui.LastFifteenPopupController"
+            prefHeight="400"
+            prefWidth="700">
+
+    <top>
+        <Label text="Ostatnie 15 wynajętych"
+               BorderPane.alignment="CENTER"
+               style="-fx-font-size:16px; -fx-font-weight:bold;">
+
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+
+        </Label>
+    </top>
+
+    <center>
+        <TableView fx:id="table">
+
+            <columns>
+
+                <TableColumn fx:id="dateCol"
+                             text="Data"
+                             prefWidth="100"/>
+
+                <TableColumn fx:id="clientCol"
+                             text="Klient"
+                             prefWidth="180"/>
+
+                <TableColumn fx:id="phoneCol"
+                             text="Telefon"
+                             prefWidth="120"/>
+
+                <TableColumn fx:id="trailerCol"
+                             text="Przyczepa"
+                             prefWidth="150"/>
+
+            </columns>
+
+        </TableView>
+    </center>
+
+</BorderPane>

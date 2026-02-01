@@ -2,7 +2,7 @@ package organization.ui.client;
 
 import org.springframework.stereotype.Component;
 import organization.entity.Client;
-import organization.service.ClientType;
+import organization.enums.ClientType;
 import organization.ui.common.DialogService;
 
 import java.util.Optional;

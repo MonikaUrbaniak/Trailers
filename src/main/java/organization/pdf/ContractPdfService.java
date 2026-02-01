@@ -4,6 +4,7 @@ import organization.entity.Client;
 import organization.entity.RentalContract;
 import organization.entity.Trailer;
 import org.springframework.stereotype.Service;
+import organization.enums.ClientType;
 
 @Service
 public class ContractPdfService {
@@ -29,7 +30,19 @@ public class ContractPdfService {
         // --- CLIENT ---
         m.setClientName(client.getFirstName() + " " + client.getLastName());
         m.setClientAddress(client.getAddress());
-        m.setClientNip(client.getNip());
+
+        if (client.getType() == ClientType.COMPANY) {
+            m.setClientCompanyLine(
+                    "firma: <strong>" + client.getCompanyName() + "</strong>,<br/>"
+            );
+            m.setClientNipLine(
+                    "NIP: <strong>" + client.getNip() + "</strong>,<br/>"
+            );
+        } else {
+            m.setClientCompanyLine("");
+            m.setClientNipLine("");
+        }
+
         m.setClientPhone(client.getPhone());
         m.setClientIdNumber(client.getIdNumber());
         m.setClientIdIssuedBy(client.getIdIssuedBy());

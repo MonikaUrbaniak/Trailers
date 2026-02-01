@@ -24,7 +24,6 @@
                 <ColumnConstraints hgrow="ALWAYS"/>
             </columnConstraints>
 
-
             <Label text="Wybierz przyczepę"/>
             <ComboBox fx:id="trailerSelector"
                       GridPane.columnIndex="1"/>
@@ -65,26 +64,17 @@
                       GridPane.rowIndex="10"
                       GridPane.columnIndex="1"/>
 
-
             <Label text="Uwagi" GridPane.rowIndex="11"/>
             <TextField fx:id="notesArea" GridPane.rowIndex="11" GridPane.columnIndex="1"/>
 
         </GridPane>
-
     </ScrollPane>
 
-
     <!-- Przyciski -->
-    <HBox spacing="10"
-          alignment="CENTER_RIGHT">
-
-        <Button fx:id="saveTrailerButton"
-                text="Zapisz"/>
-
-        <Button fx:id="deleteTrailerButton"
-                text="Usuń"
-                disable="true"/>
-
+    <HBox spacing="10" alignment="CENTER_RIGHT">
+        <Button fx:id="newTrailerButton" text="➕ Nowa przyczepa"/>
+        <Button fx:id="saveTrailerButton" text="Zapisz"/>
+        <Button fx:id="deleteTrailerButton" text="Usuń" disable="true"/>
         <Button fx:id="cancelButton"
                 text="Anuluj"/>
 

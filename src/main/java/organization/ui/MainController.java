@@ -5,17 +5,21 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import organization.entity.Client;
 import organization.entity.Trailer;
 import organization.pdf.ContractPdfFacade;
 import organization.service.ClientService;
-import organization.service.ClientType;
+import organization.enums.ClientType;
 import organization.service.RentalContractService;
 import organization.ui.client.ClientCrudController;
 import organization.ui.client.ClientFormValidator;
@@ -29,76 +33,46 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 import organization.ui.trailer.TrailerEditController;
 
-import java.awt.*;
-
 
 @Component
 public class MainController {
 
     // ===== LEWA STRONA =====
-    @FXML
-    private TextField searchField;
-    @FXML
-    private TableView<ClientRow> clientsTable; //Którego klienta użytkownik MA TERAZ zaznaczonego
-    @FXML
-    private TableColumn<ClientRow, String> nameColumn;
-    @FXML
-    private TableColumn<ClientRow, String> phoneColumn;
-    @FXML
-    private Button refreshButton;
-    @FXML
-    private Button addButton;
+    @FXML private TextField searchField;
+    @FXML private TableView<ClientRow> clientsTable; //Którego klienta użytkownik MA TERAZ zaznaczonego
+    @FXML private TableColumn<ClientRow, String> nameColumn;
+    @FXML private TableColumn<ClientRow, String> phoneColumn;
+    @FXML private Button refreshButton;
+    @FXML private Button addButton;
 
     // ===== ŚRODEK =====
-    @FXML
-    private ComboBox<ClientType> typeComboBox;
-    @FXML
-    private TextField firstNameField;
-    @FXML
-    private TextField lastNameField;
-
-    @FXML
-    private Label companyLabel;
-    @FXML
-    private TextField companyField;
-    @FXML
-    private Label nipLabel;
-    @FXML
-    private TextField nipField;
-
-    @FXML
-    private TextField addressField;
-    @FXML
-    private TextField phoneField;
-    @FXML
-    private TextField idNumberField;
-    @FXML
-    private TextField idIssuedByField;
-
-    @FXML
-    private Button editButton;
-    @FXML
-    private Button saveButton;
-    @FXML
-    private Button deleteButton;
-    @FXML
-    private Button generateContractButton;
-    @FXML
-    private Button rentTrailerButton;
-    @FXML
-    private Button historyButton;
+    @FXML private ComboBox<ClientType> typeComboBox;
+    @FXML private TextField firstNameField;
+    @FXML private TextField lastNameField;
+    @FXML private Label companyLabel;
+    @FXML private TextField companyField;
+    @FXML private Label nipLabel;
+    @FXML private TextField nipField;
+    @FXML private TextField addressField;
+    @FXML private TextField phoneField;
+    @FXML private TextField idNumberField;
+    @FXML private TextField idIssuedByField;
+    @FXML private Button editButton;
+    @FXML private Button saveButton;
+    @FXML private Button deleteButton;
+    @FXML private Button generateContractButton;
+    @FXML private Button rentTrailerButton;
+    @FXML private Button historyButton;
     // ===== PRZYCZEPA + FORMULARZ =====
-    @FXML
-    private VBox trailerInfoBox;
-    @FXML
-    private Label selectedTrailerLabel;
+    @FXML private VBox trailerInfoBox;
+    @FXML private Label selectedTrailerLabel;
     // ===== PRAWA STRONA =====
-    @FXML
-    private StackPane rightPanel;
+    @FXML private StackPane rightPanel;
    // -------------
     @FXML private StackPane trailerEditContainer;
     @FXML private Button editTrailerButton;
-    private Node trailerEditView;
+    @FXML private Button lastTenRentalsButton;
+
 
     @Autowired
     private ClientService clientService;
@@ -123,6 +97,7 @@ public class MainController {
     @Autowired
     private ClientTableController clientTableController;
 
+    private Node trailerEditView;
     private Client currentClient;
 
     private TrailerEditController trailerEditController;
@@ -135,7 +110,9 @@ public class MainController {
         initActions();
         initInitialState();
         rentalFlowController.init(trailerInfoBox, selectedTrailerLabel, rightPanel);
+        lastTenRentalsButton.setOnAction(e -> openLastFifteenPopup());
     }
+
 
     private void initTable() {
         nameColumn.setCellValueFactory(c -> c.getValue().nameProperty());
@@ -147,6 +124,30 @@ public class MainController {
                 clientService.getById(row.getId()).ifPresent(this::showClient)
         );
     }
+
+    private void openLastFifteenPopup() {
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/ui/LastFifteenPopup.fxml")
+            );
+
+            loader.setControllerFactory(applicationContext::getBean);
+
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            stage.setTitle("Ostatnie 10 wynajętych");
+            stage.setScene(new Scene(root));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
 
     private void initFiltering() {
         searchField.textProperty().addListener(

@@ -52,11 +52,25 @@ public class RentalContractService {
 
     private RentalContractHistoryDTO toHistoryDto(RentalContract c) {
         RentalContractHistoryDTO dto = new RentalContractHistoryDTO();
+        dto.setContractId(c.getId());
         dto.setContractDate(c.getContractDate());
-        dto.setTrailerName(c.getTrailer().getName());
+//        dto.setTrailerName(c.getTrailer().getName());
+        dto.setTrailerName(
+                c.getTrailer() != null
+                        ? c.getTrailer().getName()
+                        : "[Usunięta]"
+        );
+
         dto.setPickupLocation(c.getPickupLocation());
         dto.setReturnLocation(c.getReturnLocation());
         return dto;
     }
+
+    @Transactional(readOnly = true)
+    public List<RentalContract> getLast15Contracts() {
+        return rentalContractRepository.findTop15ByOrderByContractDateDesc();
+    }
+
+
 }
 

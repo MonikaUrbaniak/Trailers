@@ -13,4 +13,5 @@ public class RentalContractHistoryDTO {
     private String trailerName;
     private String pickupLocation;
     private String returnLocation;
+    private Long contractId;
 }

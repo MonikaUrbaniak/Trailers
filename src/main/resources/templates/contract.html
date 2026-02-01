@@ -10,8 +10,23 @@
         p  { margin: 6px 0;
            font-size: 12px;}
         .sig { margin-top: 28px; display: flex; gap: 24px; }
-        .sig .box { flex: 1; text-align: center; }
-        .sig .line { margin-top: 36px; border-top: 1px solid #000; }
+<!--        .sig .box { flex: 1; text-align: center; }-->
+<!--        .sig .line { margin-top: 36px; border-top: 1px solid #000; }-->
+.sig .box {
+    flex: 1;
+    text-align: left;
+}
+
+.sig .name {
+    font-size: 13px;
+    margin-bottom: 4px;
+}
+
+.sig .line {
+    width: 100%;
+    border-top: 1px solid #000;
+    margin-top: 2px;
+}
         .center {
   text-align: center;
 }
@@ -32,7 +47,10 @@
 <p style="font-size: 14px;">
     a <strong>[[${client.name}]]</strong>,<br/>
     adres: <strong>[[${client.address}]]</strong>,<br/>
-    NIP: <strong>[[${client.nip}]]</strong>,<br/>
+<!--    firma: <strong>[[${client.companyName}]]</strong>,<br/>-->
+<!--    NIP: <strong>[[${client.nip}]]</strong>,<br/>-->
+    [[${client.companyLine}]]
+    [[${client.nipLine}]]
     tel.: <strong>[[${client.phone}]]</strong>,<br/>
     dowód osobisty nr <strong>[[${client.idNumber}]]</strong>,<br/>
     wydany przez <strong>[[${client.idIssuedBy}]]</strong>,<br/>
@@ -107,10 +125,10 @@
 
 <p>
     1. Przyczepę oraz osprzęt, o której mowa wyżej, wynajmuje się
-    od godz. ............ dnia
-    ..………….20….....r
+    <br/>od godz. ............ dnia
+    ..………….20….....r<br/>
     do godz. ............ dnia
-    …………20…....r.
+    …………20…....r.<br/>
     Najemca zobowiązuje się do zwrotu wypożyczonej przyczepy wymienionej w punkcie 1 § 1 do upływu wymienionego wyżej terminu.
     W przypadku zwłoki  postępowanie będzie zgodne z  regulaminem.
 </p>
@@ -163,14 +181,30 @@
 
 <div class="sig">
     <div class="box">
+        <div class="name"><strong>[[${lessor.name}]]</strong></div>
         <div class="line"></div>
-        <div>Wynajmujący</div>
+        <div>Wynajmujący</div><br/><br/>
     </div>
+
     <div class="box">
+        <div class="name"><strong>[[${client.name}]]</strong></div>
         <div class="line"></div>
         <div>Najemca</div>
     </div>
 </div>
+
+<!--<div class="sig">-->
+<!--    <div class="box">-->
+<!--        <div><strong>[[${lessor.name}]]</strong></div>-->
+<!--        <div class="line"></div>-->
+<!--        <div>Wynajmujący</div>-->
+<!--    </div>-->
+<!--    <div class="box">-->
+<!--        <div><strong>[[${client.name}]]</strong></div>-->
+<!--        <div class="line"></div>-->
+<!--        <div>Najemca</div>-->
+<!--    </div>-->
+<!--</div>-->
 
 <p style="margin-top: 18px;">
     Data i miejscowość: <strong>[[${signingPlace}]]</strong>,

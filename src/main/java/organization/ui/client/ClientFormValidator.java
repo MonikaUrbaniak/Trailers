@@ -1,7 +1,7 @@
 package organization.ui.client;
 
 import org.springframework.stereotype.Component;
-import organization.service.ClientType;
+import organization.enums.ClientType;
 
 @Component
 public class ClientFormValidator {

@@ -19,9 +19,14 @@ public class RentalContract {
     @JoinColumn(name = "client_id")
     private Client client;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "trailer_id")
+    @ManyToOne
+    @JoinColumn(name = "trailer_id", nullable = true)
     private Trailer trailer;
+
+
+//    @ManyToOne(optional = false)
+//    @JoinColumn(name = "trailer_id")
+//    private Trailer trailer;
 
     // ===== DANE UMOWY =====
 

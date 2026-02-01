@@ -22,6 +22,7 @@ public class ContractPdfModel {
 
     //  CLIENT
     private String clientName;
+    private String clientCompanyName;
     private String clientAddress;
     private String clientNip;
     private String clientPhone;
@@ -41,4 +42,8 @@ public class ContractPdfModel {
     // OPTIONAL
     private String secondDriverName;
     private String secondDriverAddress;
+
+    private String clientCompanyLine;
+    private String clientNipLine;
+
 }

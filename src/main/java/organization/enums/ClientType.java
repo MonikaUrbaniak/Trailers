@@ -1,4 +1,4 @@
-package organization.service;
+package organization.enums;
 
 public enum ClientType {
 
