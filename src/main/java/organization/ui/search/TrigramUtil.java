@@ -8,9 +8,7 @@ public class TrigramUtil {
     public static Set<String> trigrams(String input) {
         Set<String> result = new HashSet<>();
         if (input == null) return result;
-
         String s = normalize(input);
-
         if (s.length() < 3) {
             result.add(s);
             return result;
@@ -22,10 +20,6 @@ public class TrigramUtil {
         return result;
     }
 
-    /**
-     * 1:1 odpowiednik PHP:
-     * score = (liczba trafionych trigramów zapytania) / (liczba trigramów zapytania)
-     */
     public static double queryCoverageScore(String query, String value) {
         Set<String> q = trigrams(query);
         Set<String> v = trigrams(value);
@@ -36,11 +30,6 @@ public class TrigramUtil {
         return (double) matches / q.size();
     }
 
-    /**
-     * Wersja UI-friendly:
-     * - contains() = szybki, intuicyjny match
-     * - trigram fallback = literówki
-     */
     public static boolean matches(String query, String value) {
         if (query == null || query.isBlank()) return true;
         if (value == null) return false;

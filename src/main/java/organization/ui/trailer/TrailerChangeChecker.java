@@ -25,8 +25,6 @@ public class TrailerChangeChecker {
         if (original == null) {
             return false;
         }
-
-
         return
                         !safeEquals(name, original.getName()) ||
                         !safeEquals(plate, original.getRegistrationNumber()) ||

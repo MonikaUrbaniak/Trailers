@@ -23,26 +23,21 @@ public class RentalContractService {
     public RentalContract saveContract(RentalDataDTO dto) {
 
         RentalContract contract = new RentalContract();
-
         // POWIĄZANIA
         contract.setClient(dto.getClient());
         contract.setTrailer(dto.getTrailer());
-
         // DANE UMOWY
         contract.setPickupLocation(dto.getPickupLocation());
         contract.setReturnLocation(dto.getReturnLocation());
         contract.setContractDate(dto.getContractDate());
-
         return rentalContractRepository.save(contract);
     }
 
     @Transactional(readOnly = true)
     public List<RentalContractHistoryDTO> getHistoryForClient(Client client) {
-
         if (client == null) {
             return List.of();
         }
-
         return rentalContractRepository
                 .findByClientOrderByContractDateDesc(client)
                 .stream()

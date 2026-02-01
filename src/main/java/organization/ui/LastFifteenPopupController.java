@@ -22,7 +22,6 @@ public class LastFifteenPopupController {
     @FXML private TableColumn<RentalContract, String> phoneCol;
     @FXML private TableColumn<RentalContract, String> trailerCol;
 
-
     @Autowired
     private PdfOpener pdfOpener;
     @Autowired
@@ -72,7 +71,6 @@ public class LastFifteenPopupController {
                 }
             }
         });
-
     }
 
     private void loadData() {

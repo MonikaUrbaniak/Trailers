@@ -14,7 +14,6 @@ import org.springframework.stereotype.Component;
 public class TrailerSelectionController {
 
     @FXML private TableView<TrailerRow> trailersTable;
-
     @FXML private TableColumn<TrailerRow, String> nameCol;
     @FXML private TableColumn<TrailerRow, String> regCol;
     @FXML private TableColumn<TrailerRow, Number> widthCol;

@@ -52,7 +52,6 @@ public class TrailerRow {
     }
 
     public static TrailerRow fromEntity(Trailer t) {
-
         return new TrailerRow(
                 t.getId(),
                 t.getName(),

@@ -117,37 +117,11 @@ public class MainController {
     private void initTable() {
         nameColumn.setCellValueFactory(c -> c.getValue().nameProperty());
         phoneColumn.setCellValueFactory(c -> c.getValue().phoneProperty());
-
         clientTableController.bind(clientsTable);
-
         clientTableController.onSelection(row ->
                 clientService.getById(row.getId()).ifPresent(this::showClient)
         );
     }
-
-    private void openLastFifteenPopup() {
-        try {
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/ui/LastFifteenPopup.fxml")
-            );
-
-            loader.setControllerFactory(applicationContext::getBean);
-
-            Parent root = loader.load();
-
-            Stage stage = new Stage();
-            stage.setTitle("Ostatnie 10 wynajętych");
-            stage.setScene(new Scene(root));
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.show();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
-
 
     private void initFiltering() {
         searchField.textProperty().addListener(
@@ -180,8 +154,6 @@ public class MainController {
                 trailerEditController.startEdit();
             }
         });
-
-
     }
 
     private void initInitialState() {
@@ -190,8 +162,6 @@ public class MainController {
         enableEdit(true);
         Platform.runLater(this::loadClientsFromDb);
     }
-
-    // ===== LOGIKA TYPÓW =====
 
     private void updateVisibility(ClientType type) {
         boolean company = type == ClientType.COMPANY;
@@ -320,7 +290,6 @@ public class MainController {
         );
     }
 
-
     private void loadTrailerEdit() {
 
         if (trailerEditView != null) return;
@@ -352,21 +321,24 @@ public class MainController {
     }
 
     private void afterTrailerSaved() {
-
-        // zamknij edycję
         hideTrailerEditPanel();
-
-        // odśwież listę przyczep w panelu wynajmu
         rentalFlowController.refreshTrailerList();
     }
 
-    public void showTrailerInEditor(Trailer trailer) {
-
-        showTrailerEditPanel(); // pokaż panel
-
-        if (trailerEditController != null) {
-            trailerEditController.setTrailer(trailer);
+    private void openLastFifteenPopup() {
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/ui/LastFifteenPopup.fxml")
+            );
+            loader.setControllerFactory(applicationContext::getBean);
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Ostatnie 10 wynajętych");
+            stage.setScene(new Scene(root));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
-
 }

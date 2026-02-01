@@ -45,11 +45,9 @@ public class RentalLocationAndDateController {
     public String getPickupLocation() {
         return pickupLocationBox.getValue();
     }
-
     public String getReturnLocation() {
         return returnLocationBox.getValue();
     }
-
     public LocalDate getContractDate() {
         return contractDatePicker.getValue();
     }

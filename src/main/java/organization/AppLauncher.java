@@ -11,7 +11,6 @@ public class AppLauncher extends Application {
 
     private ConfigurableApplicationContext context;
 
-
     @Override
     public void init() {
         context = new SpringApplicationBuilder(TrailersApplication.class).run();

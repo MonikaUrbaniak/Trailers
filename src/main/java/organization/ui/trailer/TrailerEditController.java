@@ -8,8 +8,6 @@ import organization.entity.Trailer;
 import organization.service.TrailerService;
 import organization.ui.common.DialogService;
 
-import java.util.Optional;
-
 @Component
 public class TrailerEditController {
 
