@@ -292,24 +292,6 @@ public class TrailerEditController {
         );
     }
 
-//    private boolean isChanged() {
-//
-//        if (originalTrailer == null) return false;
-//        return changeChecker.isChanged(
-//                originalTrailer,
-//                nameField.getText(),
-//                plateField.getText(),
-//                price4h.getText(),
-//                price24h.getText(),
-//                widthField.getText(),
-//                lengthField.getText(),
-//                heightField.getText(),
-//                resor.getValue(),
-//                wheel.getValue(),
-//                axleCount.getValue(),
-//                notesArea.getText()
-//        );
-//    }
 
     private void addChangeListeners() {
         nameField.textProperty().addListener((a,b,c) -> refreshSaveButton());

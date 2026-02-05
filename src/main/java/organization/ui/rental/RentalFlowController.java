@@ -23,7 +23,6 @@ import java.nio.file.Path;
 @Component
 public class RentalFlowController {
 
-    // ===== Spring dependencies =====
     private final ApplicationContext applicationContext;
     private final RentalContractService rentalContractService;
     private final ContractPdfFacade contractPdfFacade;
@@ -35,13 +34,12 @@ public class RentalFlowController {
     private RentalHistoryController rentalHistoryController;
     private TrailerSelectionController trailerSelectionController;
 
-
-    // ===== UI references (runtime) =====
     private VBox trailerInfoBox;
     private Label selectedTrailerLabel;
     private StackPane rightPanel;
+    private Runnable onTrailerSelectedCallback;
 
-    // ===== Flow state =====
+
     private final RentalDraft rentalDraft = new RentalDraft();
 
     public RentalFlowController(
@@ -58,7 +56,6 @@ public class RentalFlowController {
         this.pdfOpener = pdfOpener;
     }
 
-    // ===== wiring from MainController =====
     public void init(
             VBox trailerInfoBox,
             Label selectedTrailerLabel,
@@ -82,15 +79,13 @@ public class RentalFlowController {
             Node panel = loader.load();
             trailerSelectionController = loader.getController();
             trailerSelectionController.setSelectionListener(this::onTrailerSelected);
-
             rightPanel.getChildren().setAll(panel);
-
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    public void refreshTrailerList() {
 
+    public void refreshTrailerList() {
         if (trailerSelectionController != null) {
             trailerSelectionController.reload();
         }
@@ -99,9 +94,17 @@ public class RentalFlowController {
     private void onTrailerSelected(Trailer trailer) {
         setSelectedTrailer(trailer);
         showRentalForm();
+        if (onTrailerSelectedCallback != null) {
+            onTrailerSelectedCallback.run();
+        }
     }
 
-    // got selected client and selected trailer, prepare form
+    public void setOnTrailerSelectedCallback(Runnable callback) {
+        this.onTrailerSelectedCallback = callback;
+    }
+
+
+    // got selected client and selected trailer, -> prepare form
     private void setSelectedTrailer(Trailer trailer) {
         this.selectedTrailer = trailer;
         rentalDraft.setTrailer(trailer);
@@ -114,18 +117,14 @@ public class RentalFlowController {
 
     private void showRentalForm() {
         if (rentalFormNode != null) return;
-
         try {
             FXMLLoader loader = new FXMLLoader(
                     MainController.class.getResource("/ui/rental/RentalFormPane.fxml")
             );
             loader.setControllerFactory(applicationContext::getBean);
-
             rentalFormNode = loader.load();
             rentalLocationAndDateController = loader.getController();
-
             trailerInfoBox.getChildren().add(rentalFormNode); // to wlasciwie chyba nie potrzebne??
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -164,15 +163,12 @@ public class RentalFlowController {
             return;
         }
 //        (UI → Draft → DTO → Service → Entity)
-
         // 1. zapis umowy
         RentalDataDTO dto = buildDtoFromDraft();
         RentalContract contract = rentalContractService.saveContract(dto);
-
         // 2. PDF
         Path pdfPath = contractPdfFacade.generateAndSaveContractPdf(contract);
         pdfOpener.openPdf(pdfPath);
-
         dialogService.info(
                 "Umowa zapisana",
                 "Umowa została zapisana w bazie i otwarta jako PDF."
@@ -183,7 +179,6 @@ public class RentalFlowController {
             Client client = rentalDraft.getClient(); // TEN klient jest pewny
             rentalHistoryController.loadHistory(client);
         }
-
         resetAfterSave();
     }
 
@@ -221,7 +216,6 @@ public class RentalFlowController {
                     getClass().getResource("/ui/rental/RentalHistoryPane.fxml")
             );
             loader.setControllerFactory(applicationContext::getBean);
-
             Node panel = loader.load();
             rentalHistoryController = loader.getController();
 
@@ -230,10 +224,8 @@ public class RentalFlowController {
                 dialogService.warn("Brak klienta", "Wybierz klienta.");
                 return;
             }
-
             rentalHistoryController.loadHistory(client);
             rightPanel.getChildren().setAll(panel);
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -243,13 +235,10 @@ public class RentalFlowController {
         if (rentalHistoryController == null) {
             return; // historia nie jest otwarta
         }
-
         Client client = rentalDraft.getClient();
         if (client == null) {
             return;
         }
-
         rentalHistoryController.loadHistory(client);
     }
-
 }

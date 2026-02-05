@@ -16,7 +16,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import organization.entity.Client;
-import organization.entity.Trailer;
 import organization.pdf.ContractPdfFacade;
 import organization.service.ClientService;
 import organization.enums.ClientType;
@@ -37,7 +36,6 @@ import organization.ui.trailer.TrailerEditController;
 @Component
 public class MainController {
 
-    // ===== LEWA STRONA =====
     @FXML private TextField searchField;
     @FXML private TableView<ClientRow> clientsTable; //Którego klienta użytkownik MA TERAZ zaznaczonego
     @FXML private TableColumn<ClientRow, String> nameColumn;
@@ -45,7 +43,6 @@ public class MainController {
     @FXML private Button refreshButton;
     @FXML private Button addButton;
 
-    // ===== ŚRODEK =====
     @FXML private ComboBox<ClientType> typeComboBox;
     @FXML private TextField firstNameField;
     @FXML private TextField lastNameField;
@@ -63,16 +60,13 @@ public class MainController {
     @FXML private Button generateContractButton;
     @FXML private Button rentTrailerButton;
     @FXML private Button historyButton;
-    // ===== PRZYCZEPA + FORMULARZ =====
-    @FXML private VBox trailerInfoBox;
-    @FXML private Label selectedTrailerLabel;
-    // ===== PRAWA STRONA =====
+
     @FXML private StackPane rightPanel;
-   // -------------
     @FXML private StackPane trailerEditContainer;
     @FXML private Button editTrailerButton;
     @FXML private Button lastTenRentalsButton;
-
+    @FXML private VBox trailerInfoBox;
+    @FXML private Label selectedTrailerLabel;
 
     @Autowired
     private ClientService clientService;
@@ -110,9 +104,11 @@ public class MainController {
         initActions();
         initInitialState();
         rentalFlowController.init(trailerInfoBox, selectedTrailerLabel, rightPanel);
+        rentalFlowController.setOnTrailerSelectedCallback(() ->
+                generateContractButton.setDisable(false)
+        );
         lastTenRentalsButton.setOnAction(e -> openLastFifteenPopup());
     }
-
 
     private void initTable() {
         nameColumn.setCellValueFactory(c -> c.getValue().nameProperty());
@@ -144,9 +140,11 @@ public class MainController {
         deleteButton.setOnAction(e -> deleteClient());
         refreshButton.setOnAction(e -> loadClientsFromDb());
         rentTrailerButton.setOnAction(e -> rentalFlowController.showTrailerPanel());
-        generateContractButton.setOnAction(e -> rentalFlowController.saveRentalContract());
+        generateContractButton.setOnAction(e -> {
+            rentalFlowController.saveRentalContract();
+            generateContractButton.setDisable(true);
+        });
         historyButton.setOnAction(e -> rentalFlowController.showRentalHistory());
-//        editTrailerButton.setOnAction(e -> showTrailerEditPanel());
         editTrailerButton.setOnAction(e -> {
             showTrailerEditPanel();
 
@@ -158,6 +156,7 @@ public class MainController {
 
     private void initInitialState() {
         rentTrailerButton.setDisable(true);
+        generateContractButton.setDisable(true);
         trailerInfoBox.setVisible(false);
         enableEdit(true);
         Platform.runLater(this::loadClientsFromDb);
@@ -182,7 +181,7 @@ public class MainController {
         typeComboBox.setValue(ClientType.PRIVATE);
         enableEdit(true);
         rentTrailerButton.setDisable(true);
-// tu -disable genereatecontract
+        generateContractButton.setDisable(true);
         rightPanel.getChildren().clear();
         rentalFlowController.clearSelectedTrailer();
         rentalFlowController.setClient(null);
@@ -200,7 +199,6 @@ public class MainController {
     }
 
     private void saveClient() {
-
         var savedOpt = clientUiActions.saveClient(
                 currentClient,
                 typeComboBox.getValue(),
@@ -213,7 +211,6 @@ public class MainController {
                 idNumberField.getText(),
                 idIssuedByField.getText()
         );
-
         if (savedOpt.isEmpty()) {
             return; // walidacja już pokazała warn
         }
@@ -258,6 +255,7 @@ public class MainController {
         idIssuedByField.setText(newVal(c.getIdIssuedBy()));
 
         rentTrailerButton.setDisable(false);
+        generateContractButton.setDisable(true);
         enableEdit(false);
         historyButton.setDisable(false);
 
@@ -278,9 +276,7 @@ public class MainController {
         saveButton.setDisable(!editable);
         deleteButton.setDisable(!editable || currentClient == null);
         editButton.setDisable(editable);
-
         rentTrailerButton.setDisable(editable);
-        generateContractButton.setDisable(editable);
     }
 
     private void loadClientsFromDb() {
@@ -328,12 +324,12 @@ public class MainController {
     private void openLastFifteenPopup() {
         try {
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/ui/LastFifteenPopup.fxml")
+                    getClass().getResource("/ui/LastRentalsPopup.fxml")
             );
             loader.setControllerFactory(applicationContext::getBean);
             Parent root = loader.load();
             Stage stage = new Stage();
-            stage.setTitle("Ostatnie 10 wynajętych");
+            stage.setTitle("Ostatnie wynajęte przyczepy");
             stage.setScene(new Scene(root));
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.show();

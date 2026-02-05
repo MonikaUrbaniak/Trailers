@@ -1,5 +1,6 @@
 package organization.service;
 
+import org.springframework.data.domain.PageRequest;
 import organization.dto.RentalContractHistoryDTO;
 import organization.dto.RentalDataDTO;
 import organization.entity.RentalContract;
@@ -21,12 +22,9 @@ public class RentalContractService {
 
     @Transactional
     public RentalContract saveContract(RentalDataDTO dto) {
-
         RentalContract contract = new RentalContract();
-        // POWIĄZANIA
         contract.setClient(dto.getClient());
         contract.setTrailer(dto.getTrailer());
-        // DANE UMOWY
         contract.setPickupLocation(dto.getPickupLocation());
         contract.setReturnLocation(dto.getReturnLocation());
         contract.setContractDate(dto.getContractDate());
@@ -62,8 +60,13 @@ public class RentalContractService {
     }
 
     @Transactional(readOnly = true)
-    public List<RentalContract> getLast15Contracts() {
-        return rentalContractRepository.findTop15ByOrderByContractDateDesc();
+    public List<RentalContract> getLastContracts(int limit) {
+
+        return rentalContractRepository
+                .findAllByOrderByContractDateDesc(
+                        PageRequest.of(0, limit)
+                )
+                .getContent();
     }
 
 

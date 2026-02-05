@@ -3,6 +3,7 @@ package organization.ui;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import organization.entity.RentalContract;
@@ -14,16 +15,18 @@ import organization.ui.common.PdfOpener;
 import java.nio.file.Path;
 
 @Component
-public class LastFifteenPopupController {
+public class LastRentalsPopupController {
 
     @FXML private TableView<RentalContract> table;
     @FXML private TableColumn<RentalContract, String> dateCol;
     @FXML private TableColumn<RentalContract, String> clientCol;
     @FXML private TableColumn<RentalContract, String> phoneCol;
     @FXML private TableColumn<RentalContract, String> trailerCol;
+    @FXML private ComboBox<Integer> limitBox;
 
     @Autowired
     private PdfOpener pdfOpener;
+
     @Autowired
     private RentalContractService rentalContractService;
 
@@ -61,7 +64,16 @@ public class LastFifteenPopupController {
                                 : "-"
                 )
         );
-        loadData();
+
+        limitBox.getItems().addAll(5, 10, 15, 20, 25, 30);
+        limitBox.setValue(10);
+
+        loadData(10);
+
+        limitBox.setOnAction(e ->
+                loadData(limitBox.getValue())
+        );
+
         table.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2) {
                 RentalContract selected =
@@ -73,10 +85,10 @@ public class LastFifteenPopupController {
         });
     }
 
-    private void loadData() {
+    private void loadData(int limit) {
         table.setItems(
                 FXCollections.observableArrayList(
-                        rentalContractService.getLast15Contracts()
+                        rentalContractService.getLastContracts(limit)
                 )
         );
     }
@@ -92,6 +104,5 @@ public class LastFifteenPopupController {
         );
         pdfOpener.openPdf(path);
     }
-
 }
 

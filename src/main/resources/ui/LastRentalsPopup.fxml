@@ -6,20 +6,30 @@
 
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="organization.ui.LastFifteenPopupController"
+            fx:controller="organization.ui.LastRentalsPopupController"
             prefHeight="400"
             prefWidth="700">
-
     <top>
-        <Label text="Ostatnie 15 wynajętych"
-               BorderPane.alignment="CENTER"
-               style="-fx-font-size:16px; -fx-font-weight:bold;">
+        <HBox spacing="15"
+              alignment="CENTER_RIGHT"
+              BorderPane.alignment="CENTER">
+
+            <Label text="Ostatnie wynajęcia"
+                   style="-fx-font-size:16px; -fx-font-weight:bold;"/>
+
+            <!-- Rozpychacz -->
+            <Region HBox.hgrow="ALWAYS"/>
+
+            <Label text="Ilość wyświetlonych przyczep:"/>
+
+            <ComboBox fx:id="limitBox"
+                      prefWidth="80"/>
 
             <padding>
                 <Insets top="10" right="10" bottom="10" left="10"/>
             </padding>
 
-        </Label>
+        </HBox>
     </top>
 
     <center>

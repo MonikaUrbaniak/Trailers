@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-        <?import javafx.scene.control.*?>
-        <?import javafx.scene.layout.*?>
-        <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
 
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
@@ -10,34 +10,34 @@
             prefWidth="1450"
             prefHeight="750">
 
-<!-- ===== LEWA STRONA ===== -->
-<left>
-    <VBox spacing="10" prefWidth="350">
-        <padding>
-            <Insets top="10" right="10" bottom="10" left="10"/>
-        </padding>
+    <!-- ===== LEWA STRONA ===== -->
+    <left>
+        <VBox spacing="10" prefWidth="350">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
 
-        <Button fx:id="addButton"
-                text="➕ Nowy klient"
-                maxWidth="Infinity"/>
+            <Button fx:id="addButton"
+                    text="➕ Nowy klient"
+                    maxWidth="Infinity"/>
 
-        <TextField fx:id="searchField"
-                   promptText="Szukaj klienta..." />
+            <TextField fx:id="searchField"
+                       promptText="Szukaj klienta..." />
 
-        <TableView fx:id="clientsTable" VBox.vgrow="ALWAYS">
-            <columns>
-                <TableColumn fx:id="nameColumn" text="Klient" prefWidth="200"/>
-                <TableColumn fx:id="phoneColumn" text="Telefon" prefWidth="130"/>
-            </columns>
-        </TableView>
+            <TableView fx:id="clientsTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="nameColumn" text="Klient" prefWidth="200"/>
+                    <TableColumn fx:id="phoneColumn" text="Telefon" prefWidth="130"/>
+                </columns>
+            </TableView>
 
-        <Button fx:id="refreshButton"
-                text="⟳ Odśwież listę"
-                maxWidth="Infinity"/>
-    </VBox>
-</left>
+            <Button fx:id="refreshButton"
+                    text="⟳ Odśwież listę"
+                    maxWidth="Infinity"/>
+        </VBox>
+    </left>
 
-<!-- ===== ŚRODEK ===== -->
+    <!-- ===== ŚRODEK ===== -->
     <center>
 
         <SplitPane orientation="VERTICAL" dividerPositions="0.65">
@@ -107,7 +107,7 @@
 
                             <Button fx:id="historyButton"
                                     text="Historia umów" prefWidth="180" disable="true"/>
-                            <Button fx:id="lastTenRentalsButton" text="Ostatnie 10 wynajętych" prefWidth="180"/>
+                            <Button fx:id="lastTenRentalsButton" text="Ostatnie wynajęte" prefWidth="180"/>
 
                         </VBox>
                     </HBox>
@@ -127,44 +127,41 @@
     </center>
 
 
-<!-- ===== PRAWA STRONA ===== -->
-<right>
-    <SplitPane orientation="VERTICAL"
-               prefWidth="520"
-               dividerPositions="0.65">
+    <!-- ===== PRAWA STRONA ===== -->
+    <right>
+        <SplitPane orientation="VERTICAL"
+                   prefWidth="520"
+                   dividerPositions="0.65">
 
-        <!-- ===== GÓRA ===== -->
-        <StackPane fx:id="rightPanel"
-                   style="-fx-border-color: #ddd; -fx-border-width: 1;">
-            <Label text="Wybierz przyczepę"/>
-        </StackPane>
+            <!-- ===== GÓRA ===== -->
+            <StackPane fx:id="rightPanel"
+                       style="-fx-border-color: #ddd; -fx-border-width: 1;">
+                <Label text="Wybierz przyczepę"/>
+            </StackPane>
 
-        <!-- ===== DÓŁ ===== -->
-        <VBox fx:id="bottomRightPane"
-              spacing="10"
-              style="-fx-border-color: #ddd; -fx-border-width: 1; -fx-padding: 10;">
+            <!-- ===== DÓŁ ===== -->
+            <VBox fx:id="bottomRightPane"
+                  spacing="10"
+                  style="-fx-border-color: #ddd; -fx-border-width: 1; -fx-padding: 10;">
 
-            <!-- Pasek tytułu -->
-            <HBox spacing="10"
-                  alignment="CENTER_LEFT">
+                <!-- Pasek tytułu -->
+                <HBox spacing="10"
+                      alignment="CENTER_LEFT">
 
-                <Label text="Edycja danych przyczep"
-                       style="-fx-font-size: 15px; -fx-font-weight: bold;"/>
+                    <Label text="Edycja danych przyczep"
+                           style="-fx-font-size: 15px; -fx-font-weight: bold;"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Button fx:id="editTrailerButton"
+                            text="Edytuj"/>
+                </HBox>
 
-                <Region HBox.hgrow="ALWAYS"/>
+                <!-- TU BĘDZIE ŁADOWANY OSOBNY FXML -->
+                <StackPane fx:id="trailerEditContainer"
+                           VBox.vgrow="ALWAYS"
+                           visible="false"
+                           managed="false"/>
 
-                <Button fx:id="editTrailerButton"
-                        text="Edytuj"/>
-
-            </HBox>
-
-            <!-- TU BĘDZIE ŁADOWANY OSOBNY FXML -->
-            <StackPane fx:id="trailerEditContainer"
-                       VBox.vgrow="ALWAYS"
-                       visible="false"
-                       managed="false"/>
-
-        </VBox>
-    </SplitPane>
-</right>
+            </VBox>
+        </SplitPane>
+    </right>
 </BorderPane>

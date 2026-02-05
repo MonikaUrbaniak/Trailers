@@ -1,5 +1,7 @@
 package organization.repositoryDAO;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import organization.entity.RentalContract;
 import organization.entity.Client;
@@ -14,6 +16,6 @@ public interface RentalContractRepository extends JpaRepository<RentalContract, 
     // Historia umów dla klienta
     List<RentalContract> findByClientOrderByContractDateDesc(Client client);
     List<RentalContract> findByTrailer(Trailer trailer);
-    List<RentalContract> findTop15ByOrderByContractDateDesc();
-
+//    List<RentalContract> findTop15ByOrderByContractDateDesc();
+    Page<RentalContract> findAllByOrderByContractDateDesc(Pageable pageable);
 }
